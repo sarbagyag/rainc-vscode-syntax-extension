@@ -1,0 +1,84 @@
+// students.rn — classes, inheritance, arrays, and string module
+benutzen str;
+benutzen math;
+
+class Person {
+  init(name, age) {
+    this.name = name;
+    this.age  = age;
+  }
+
+  greet() {
+    print "Hi, I am " + this.name + " and I am " + this.age + " years old.";
+  }
+}
+
+class Student < Person {
+  init(name, age, grade) {
+    super.init(name, age);
+    this.grade  = grade;
+    this.scores = #[];
+  }
+
+  addScore(s) {
+    this.scores->push(s);
+  }
+
+  average() {
+    if (this.scores->len() == 0) { return 0; }
+    var total = 0;
+    var i = 0;
+    while (i < this.scores->len()) {
+      total = total + this.scores[i];
+      i = i + 1;
+    }
+    return total / this.scores->len();
+  }
+
+  report() {
+    this.greet();
+    print "  Grade  : " + this.grade;
+    print "  Scores : " + this.scores;
+    print "  Average: " + math::floor(this.average() * 10) / 10;
+  }
+}
+
+// build a roster
+var roster = #[];
+roster->push(Student("Alice", 20, "A"));
+roster->push(Student("Bob",   19, "B"));
+roster->push(Student("Cara",  21, "A"));
+
+// add some scores
+roster[0].addScore(92);
+roster[0].addScore(88);
+roster[0].addScore(95);
+
+roster[1].addScore(74);
+roster[1].addScore(81);
+roster[1].addScore(69);
+
+roster[2].addScore(97);
+roster[2].addScore(100);
+roster[2].addScore(93);
+
+// print reports
+print "===== Student Reports =====";
+var i = 0;
+while (i < roster->len()) {
+  roster[i].report();
+  print "";
+  i = i + 1;
+}
+
+// find top scorer using str module for formatting
+print "===== Top Scorer =====";
+var best = roster[0];
+var j = 1;
+while (j < roster->len()) {
+  if (roster[j].average() > best.average()) {
+    best = roster[j];
+  }
+  j = j + 1;
+}
+print "Winner: " + best.name + " with avg " + math::floor(best.average() * 10) / 10;

@@ -1,0 +1,32 @@
+// fibonacci.rn — recursive + iterative fibonacci with math module
+benutzen math;
+
+fun fib(n) {
+  if (n <= 1) { return n; }
+  return fib(n - 1) + fib(n - 2);
+}
+
+print "=== Fibonacci (recursive) ===";
+var i = 0;
+while (i < 10) {
+  print fib(i);
+  i = i + 1;
+}
+
+// store results in an array and sort (just to demo array methods)
+print "";
+print "=== Stored in array ===";
+var results = #[];
+for (var j = 0; j < 10; j = j + 1) {
+  results->push(fib(j));
+}
+print results;
+print "length: " + results->len();
+print "contains 8: " + results->contains(8);
+
+// use math module
+print "";
+print "=== Math module ===";
+print "sqrt(144) = " + math::sqrt(144);
+print "floor(3.99) = " + math::floor(3.99);
+print "ceil(3.01)  = " + math::ceil(3.01);

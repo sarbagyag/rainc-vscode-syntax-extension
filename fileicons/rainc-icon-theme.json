@@ -1,0 +1,10 @@
+{
+  "iconDefinitions": {
+    "_rainc": {
+      "iconPath": "../images/rain-icon.svg"
+    }
+  },
+  "fileExtensions": {
+    "rn": "_rainc"
+  }
+}

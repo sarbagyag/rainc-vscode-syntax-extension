@@ -1,0 +1,73 @@
+// arrays_demo.rn — every array method + closures
+benutzen math;
+
+print "=== Array Methods ===";
+
+var nums = #[5, 3, 8, 1, 9, 2, 7, 4, 6];
+print "original : " + nums;
+
+nums->sort();
+print "sorted   : " + nums;
+
+nums->reverse();
+print "reversed : " + nums;
+
+print "len      : " + nums->len();
+print "slice 2-5: " + nums->slice(2, 5);
+print "contains 9: " + nums->contains(9);
+
+var last = nums->pop();
+print "popped   : " + last;
+print "after pop: " + nums;
+
+nums->push(99);
+print "pushed 99: " + nums;
+
+// ---- closure counter ----
+print "";
+print "=== Closure Counter ===";
+
+fun makeCounter(start) {
+  var count = start;
+  fun next() {
+    count = count + 1;
+    return count;
+  }
+  return next;
+}
+
+var counter = makeCounter(0);
+print counter();
+print counter();
+print counter();
+
+// ---- for loop + array build ----
+print "";
+print "=== Squares via for loop ===";
+var squares = #[];
+for (var i = 1; i <= 8; i = i + 1) {
+  squares->push(i * i);
+}
+print squares;
+
+// ---- nested arrays ----
+print "";
+print "=== Matrix (nested arrays) ===";
+var matrix = #[
+  #[1, 2, 3],
+  #[4, 5, 6],
+  #[7, 8, 9]
+];
+
+var row = 0;
+while (row < matrix->len()) {
+  print matrix[row];
+  row = row + 1;
+}
+
+// diagonal sum
+var diag = 0;
+for (var d = 0; d < matrix->len(); d = d + 1) {
+  diag = diag + matrix[d][d];
+}
+print "diagonal sum: " + diag;

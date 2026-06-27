@@ -1,0 +1,169 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Rain (C)",
+  "scopeName": "source.rainc",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#array-literal" },
+    { "include": "#keywords" },
+    { "include": "#constants" },
+    { "include": "#numbers" },
+    { "include": "#module-call" },
+    { "include": "#array-method" },
+    { "include": "#class-declaration" },
+    { "include": "#function-declaration" },
+    { "include": "#function-call" },
+    { "include": "#operators" }
+  ],
+  "repository": {
+    "comments": {
+      "name": "comment.line.double-slash.rainc",
+      "match": "//.*$"
+    },
+
+    "strings": {
+      "name": "string.quoted.double.rainc",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.rainc",
+          "match": "\\\\."
+        }
+      ]
+    },
+
+    "array-literal": {
+      "comment": "#[ ... ] array literal — highlight the # sigil",
+      "match": "(#)(?=\\[)",
+      "captures": {
+        "1": { "name": "keyword.operator.array.rainc" }
+      }
+    },
+
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.rainc",
+          "match": "\\b(if|else|while|for|return|break|continue)\\b"
+        },
+        {
+          "name": "keyword.declaration.rainc",
+          "match": "\\b(var|fun|class)\\b"
+        },
+        {
+          "name": "keyword.other.import.rainc",
+          "comment": "benutzen is the module import keyword",
+          "match": "\\b(benutzen)\\b"
+        },
+        {
+          "name": "variable.language.rainc",
+          "match": "\\b(this|super)\\b"
+        },
+        {
+          "name": "keyword.operator.logical.rainc",
+          "match": "\\b(and|or|not)\\b"
+        },
+        {
+          "name": "keyword.other.print.rainc",
+          "match": "\\b(print|printin)\\b"
+        }
+      ]
+    },
+
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.rainc",
+          "match": "\\b(true|false)\\b"
+        },
+        {
+          "name": "constant.language.null.rainc",
+          "match": "\\bnil\\b"
+        }
+      ]
+    },
+
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.float.rainc",
+          "match": "\\b[0-9]+\\.[0-9]+\\b"
+        },
+        {
+          "name": "constant.numeric.integer.rainc",
+          "match": "\\b[0-9]+\\b"
+        }
+      ]
+    },
+
+    "module-call": {
+      "comment": "name::function() — module-scoped call e.g. math::sqrt()",
+      "match": "\\b([A-Za-z_][A-Za-z0-9_]*)(::)([A-Za-z_][A-Za-z0-9_]*)(?=\\s*\\()",
+      "captures": {
+        "1": { "name": "entity.name.namespace.rainc" },
+        "2": { "name": "keyword.operator.namespace.rainc" },
+        "3": { "name": "entity.name.function.rainc" }
+      }
+    },
+
+    "array-method": {
+      "comment": "arr->method() — Rain array method call",
+      "match": "(->)([A-Za-z_][A-Za-z0-9_]*)(?=\\s*\\()",
+      "captures": {
+        "1": { "name": "keyword.operator.arrow.rainc" },
+        "2": { "name": "entity.name.function.rainc" }
+      }
+    },
+
+    "class-declaration": {
+      "comment": "class Foo < Bar",
+      "match": "\\b(class)\\s+([A-Za-z_][A-Za-z0-9_]*)(?:\\s*(<)\\s*([A-Za-z_][A-Za-z0-9_]*))?",
+      "captures": {
+        "1": { "name": "keyword.declaration.rainc" },
+        "2": { "name": "entity.name.type.class.rainc" },
+        "3": { "name": "keyword.operator.inheritance.rainc" },
+        "4": { "name": "entity.name.type.class.rainc" }
+      }
+    },
+
+    "function-declaration": {
+      "comment": "fun myFunc(...)",
+      "match": "\\b(fun)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+      "captures": {
+        "1": { "name": "keyword.declaration.rainc" },
+        "2": { "name": "entity.name.function.rainc" }
+      }
+    },
+
+    "function-call": {
+      "comment": "someFunc(...)",
+      "match": "\\b([A-Za-z_][A-Za-z0-9_]*)(?=\\s*\\()",
+      "captures": {
+        "1": { "name": "entity.name.function.rainc" }
+      }
+    },
+
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.comparison.rainc",
+          "match": "(==|!=|<=|>=|<|>)"
+        },
+        {
+          "name": "keyword.operator.arithmetic.rainc",
+          "match": "(\\+|-|\\*|/|%)"
+        },
+        {
+          "name": "keyword.operator.assignment.rainc",
+          "match": "(?<![=!<>])=(?!=)"
+        },
+        {
+          "name": "keyword.operator.logical.rainc",
+          "match": "!"
+        }
+      ]
+    }
+  }
+}

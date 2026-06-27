@@ -1,0 +1,43 @@
+{
+  "name": "rainlang",
+  "displayName": "Rain Language (C)",
+  "description": "Syntax highlighting and file icon support for the Rain programming language — C bytecode VM edition",
+  "version": "0.0.1",
+  "publisher": "rain-lang",
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Themes"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yugal109/rainc"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "rainc",
+        "aliases": ["Rain", "rainc", "rn"],
+        "extensions": [".rn"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "rainc",
+        "scopeName": "source.rainc",
+        "path": "./syntaxes/rainc.tmLanguage.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "rainc-icons",
+        "label": "Rain Icons (C)",
+        "path": "./fileicons/rainc-icon-theme.json"
+      }
+    ]
+  }
+}

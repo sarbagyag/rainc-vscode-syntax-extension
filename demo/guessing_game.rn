@@ -1,0 +1,42 @@
+// guessing_game.rn — random number, io for stdin, os module
+benutzen math;
+benutzen io;
+benutzen os;
+
+fun playGame(secret, maxTries) {
+  print "I picked a number between 1 and 100. You have " + maxTries + " tries.";
+  print "";
+
+  var tries = 0;
+  var won   = false;
+
+  while (tries < maxTries and !won) {
+    var raw   = io::readLine("Guess: ");
+    // Rain strings are truthy; nil means EOF
+    if (raw == nil) {
+      print "No input — exiting.";
+      return;
+    }
+
+    // treat input as number
+    // (Rain auto-coerces string->number in arithmetic context)
+    var guess = raw + 0;
+    tries = tries + 1;
+
+    if (guess < secret) {
+      print "Too low!  (" + (maxTries - tries) + " tries left)";
+    } else if (guess > secret) {
+      print "Too high! (" + (maxTries - tries) + " tries left)";
+    } else {
+      print "Correct! You got it in " + tries + " " + (tries == 1 and "try" or "tries") + ".";
+      won = true;
+    }
+  }
+
+  if (!won) {
+    print "Out of tries. The number was " + secret + ".";
+  }
+}
+
+var secret = math::floor(math::random() * 100) + 1;
+playGame(secret, 7);
